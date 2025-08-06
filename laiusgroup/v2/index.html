@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laius Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-1: #5C00FF;
+            --primary-2: #2FE8C6;
+            --text-primary: #3A3A3F;
+            --text-secondary: #666;
+            --bg-white: #ffffff;
+            --bg-light: #f8f9fa;
+            --border-light: #e9ecef;
+            --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 600;
+        }
+
+        /* nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-1);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-1);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border: 2px solid transparent;
+            background: none;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-1);
+            color: white;
+            border-color: var(--primary-1);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-2);
+            border-color: var(--primary-2);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-primary);
+            color: white;
+        }
+
+        .btn-outline-primary {
+            background: transparent;
+            color: var(--primary-1);
+            border-color: var(--primary-1);
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary-1);
+            color: white;
+        }
+
+        .btn-outline-secondary {
+            background: transparent;
+            color: var(--primary-2);
+            border-color: var(--primary-2);
+        }
+
+        .btn-outline-secondary:hover {
+            background: var(--primary-2);
+            color: white;
+        }
+
+        /* hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            background: var(--bg-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-2);
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-1);
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            line-height: 1.1;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .hero .hero-accent {
+            color: var(--primary-1);
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero .btn {
+            font-size: 1.1rem;
+            padding: 1.2rem 2.5rem;
+            margin: 0 1rem 1rem 0;
+        }
+
+        /* section styels */
+        .section {
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-content p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .mission {
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .mission::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-1);
+        }
+
+        .mission-text {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 600;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+        }
+
+        .benefits {
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .benefits::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-2);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: white;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .benefit-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-1);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .benefit-item:hover {
+            transform: translateX(5px);
+            border-color: var(--primary-2);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 600;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .benefit-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .story {
+            position: relative;
+        }
+
+        /* contact */
+        .contact {
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-2);
+        }
+
+        .contact .btn {
+            margin-top: 2rem;
+        }
+
+        footer {
+            background: #1F2128;
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-2);
+            border-color: var(--primary-2);
+        }
+
+        .footer-disclaimer {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #555;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background: var(--primary-1);
+            margin: 0 auto 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-buttons .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 0 1rem;
+            }
+
+            .hero .btn {
+                display: block;
+                margin: 0 0 1rem 0;
+                width: 100%;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+        }
+
+        .geometric-accent {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 3px solid var(--primary-1);
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        .geometric-accent.secondary {
+            border-color: var(--primary-2);
+            animation-direction: reverse;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- nav -->
+    <nav>
+        <div class="nav-container">
+            <div>
+     <a href="https://laiusgroup.com">
+  <img src="laiuslogo.png" alt="Laius Group" style="height: 48px; vertical-align: middle; margin-right: 8px;">
+</a>
+  </div>
+            <ul class="nav-links">
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#products">What We're Building</a></li>
+                <li><a href="#company">Story</a></li>
+                <li><a href="#solutions">Staff Benefits</a></li>
+                <li><a href="#getintouch">Get In Touch</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="sso.html" class="btn btn-outline-secondary">Log in</a>
+                <a href="mailto:collaborate@laiusgroup.com" class="btn btn-primary">Collaborate</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- hero -->
+    <section class="hero">
+        <div class="geometric-accent" style="top: 15%; right: 10%;"></div>
+        <div class="geometric-accent secondary" style="bottom: 25%; left: 8%;"></div>
+        <div class="hero-content">
+            <h1>The <span class="hero-accent">Cloud</span> That Powers <span class="hero-accent">Creators</span>.</h1>
+            <p>We’re on a mission to empower developers, creators, and agencies with reliable cloud infrastructure and premium digital services.</p>
+            <a href="#mission" class="btn btn-primary">Learn More</a>
+            <a href="#getintouch" class="btn btn-outline-secondary">Contact Us</a>
+        </div>
+    </section>
+
+    <section class="section mission" id="mission">
+        <div class="container">
+            <h2 class="section-title">The Mission</h2>
+            <div class="accent-line"></div>
+            <div class="section-content">
+                <p class="mission-text">I’m Igor Kalen, the person behind Laius Group, and I’m on a mission to simplify and empower the digital world for developers, creators, and agencies — with reliable cloud infrastructure and high-quality digital services.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- services -->
+    <section class="section" id="products">
+        <div class="container">
+            <h2 class="section-title">What We're Building</h2>
+            <div class="accent-line"></div>
+            <div class="services-grid">
+                <div class="service-card">
+                                                                 <div class="service-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M120-160v-160h720v160H120Zm80-40h80v-80h-80v80Zm-80-440v-160h720v160H120Zm80-40h80v-80h-80v80Zm-80 280v-160h720v160H120Zm80-40h80v-80h-80v80Z"/>
+  </svg>
+</div>
+                    <h3>Cloud Infrastructure</h3>
+                    <p>VPS hosting, storage solutions, and cloud compute power for scalable applications that grow with your business.</p>
+                </div>
+                <div class="service-card">
+                                                                                    <div class="service-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M186-80q-54 0-80-22t-26-66q0-58 49-74t116-16h21v-56q0-34-1-55.5t-6-35.5q-5-14-11.5-19.5T230-430q-9 0-16.5 3t-12.5 8q-4 5-5 10.5t1 11.5q6 11 14 21.5t8 24.5q0 25-17.5 42.5T159-291q-25 0-42.5-17.5T99-351q0-27 12-44t32.5-27q20.5-10 47.5-14t58-4q85 0 118 30.5T400-302v147q0 19 4.5 28t15.5 9q12 0 19.5-18t9.5-56h11q-3 62-23.5 87T368-80q-43 0-67.5-13.5T269-134q-10 29-29.5 41.5T186-80Zm373 0q-20 0-32.5-16.5T522-132l102-269q7-17 22-28t34-11q19 0 34 11t22 28l102 269q8 19-4.5 35.5T801-80q-12 0-22-7t-15-19l-20-58H616l-20 58q-4 11-14 18.5T559-80Zm-324-29q13 0 22-20.5t9-49.5v-67q-26 0-38 15.5T216-180v11q0 36 4 48t15 12Zm407-125h77l-39-114-38 114Zm-37-285q-48 0-76.5-33.5T500-643q0-104 66-170.5T735-880q42 0 68 9.5t26 24.5q0 6-2 12t-7 11q-5 7-12.5 10t-15.5 1q-14-4-32-7t-33-3q-71 0-114 48t-43 127q0 22 8 46t36 24q11 0 21.5-5t18.5-14q17-18 31.5-60T712-758q2-13 10.5-18.5T746-782q18 0 27.5 9.5T779-749q-12 43-17.5 75t-5.5 58q0 20 5.5 29t16.5 9q11 0 21.5-8t29.5-30q2-3 15-7 8 0 12 6t4 17q0 28-32 54t-67 26q-26 0-44.5-14T691-574q-15 26-37 40.5T605-519Zm-485-1v-220q0-58 41-99t99-41q58 0 99 41t41 99v220h-80v-80H200v80h-80Zm80-160h120v-60q0-25-17.5-42.5T260-800q-25 0-42.5 17.5T200-740v60Z"/>
+  </svg>
+</div>
+                    <h3>Creative Services</h3>
+                    <p>Web design, graphic design, and branding solutions for modern businesses that need to stand out.</p>
+                </div>
+                <div class="service-card">
+                                                                                <div class="service-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M320-240 80-480l240-240 57 57-184 184 183 183-56 56Zm320 0-57-57 184-184-183-183 56-56 240 240-240 240Z"/>
+  </svg>
+</div>
+                    <h3>Developer Tools</h3>
+                    <p>APIs, white-label infrastructure, and development resources for builders who create amazing things.</p>
+                </div>
+                <div class="service-card">
+                                                                                                    <div class="service-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/>
+  </svg>
+</div>
+                    <h3>Digital Services</h3>
+                    <p>Email services, domain registration, and social media management for comprehensive digital presence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section story" id="company">
+        <div class="container">
+            <h2 class="section-title">The Story</h2>
+            <div class="accent-line"></div>
+            <div class="section-content">
+              <p>I started working with servers out of pure curiosity. That passion grew into a vision—to build a flexible digital platform that champions creativity, reliability, and freedom.</p>
+                <p>After years of experience in the digital space, the team & I are now preparing to launch something truly special. A hybrid platform that combines the best of cloud infrastructure with premium creative services, designed for the next generation of digital innovators.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section benefits" id="solutions">
+        <div class="container">
+            <h2 class="section-title">Building the Future Team</h2>
+            <div class="accent-line"></div>
+            <div class="section-content">
+                <p>We're planning some of the most worker-friendly perks in the industry: remote-first flexibility, clear communication, great pay, and a culture focused on creativity and innovation.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+       <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M680-600h80v-80h-80v80Zm0 160h80v-80h-80v80Zm0 160h80v-80h-80v80Zm0 160v-80h160v-560H480v56l-80-58v-78h520v720H680Zm-640 0v-400l280-200 280 200v400H360v-200h-80v200H40Zm80-80h80v-200h240v200h80v-280L320-622 120-480v280Zm560-360ZM440-200v-200H200v200-200h240v200Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Remote-First Culture</h3>
+                        <p>Work from anywhere with flexible schedules and async collaboration tools that respect your time.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                         <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Competitive Compensation</h3>
+                        <p>Great pay with equity options and performance-based bonuses that reward excellence.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                              <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M491-339q70 0 119-45t49-109q0-57-36.5-96.5T534-629q-47 0-79.5 30T422-525q0 19 7.5 37t21.5 33l57-57q-3-2-4.5-5t-1.5-7q0-11 9-17.5t23-6.5q20 0 33 16.5t13 39.5q0 31-25.5 52.5T492-418q-47 0-79.5-38T380-549q0-29 11-55.5t31-46.5l-57-57q-32 31-49 72t-17 86q0 88 56 149.5T491-339ZM240-80v-172q-57-52-88.5-121.5T120-520q0-150 105-255t255-105q125 0 221.5 73.5T827-615l52 205q5 19-7 34.5T840-360h-80v120q0 33-23.5 56.5T680-160h-80v80h-80v-160h160v-200h108l-38-155q-23-91-98-148t-172-57q-116 0-198 81t-82 197q0 60 24.5 114t69.5 96l26 24v208h-80Zm254-360Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Creative Freedom</h3>
+                        <p>Encourage innovation and creative problem-solving in all roles with autonomy to excel.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                                              <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Growth Opportunities</h3>
+                        <p>Continuous learning budget and career development programs for professional advancement.</p>
+                    </div>
+                </div>
+
+           <div class="benefit-item">
+                                              <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M360-840v-80h240v80H360ZM480-80q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 116 82 198t198 82Zm0-280ZM360-280h80v-320h-80v320Zm160 0h80v-320h-80v320Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Daily Stress Breaks</h3>
+                        <p>Two quick 5-minute breaks every day to step back, breathe, and recharge your brain - because burnout sucks.</p>
+                    </div>
+                </div>
+
+                          <div class="benefit-item">
+                                              <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M0-160v-80h160v-40q-33 0-56.5-23.5T80-360v-400q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v400q0 33-23.5 56.5T800-280v40h160v80H0Zm160-200h640v-400H160v400Zm0 0v-400 400Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Company Equipment</h3>
+                        <p>We hook you up with a company laptop or computer so you can work smooth without hunting down gear or using your own tech.</p>
+                    </div>
+                </div>
+
+                                 <div class="benefit-item">
+                                              <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M160-80q-17 0-28.5-11.5T120-120v-200q0-33 23.5-56.5T200-400v-160q0-33 23.5-56.5T280-640h160v-58q-18-12-29-29t-11-41q0-15 6-29.5t18-26.5l56-56 56 56q12 12 18 26.5t6 29.5q0 24-11 41t-29 29v58h160q33 0 56.5 23.5T760-560v160q33 0 56.5 23.5T840-320v200q0 17-11.5 28.5T800-80H160Zm120-320h400v-160H280v160Zm-80 240h560v-160H200v160Zm80-240h400-400Zm-80 240h560-560Zm560-240H200h560Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Birthday Leave</h3>
+                        <p>Your birthday’s a big deal - take the day off on us and get a cool gift to make it even better. Cake and surprises? Yes, please.</p>
+                    </div>
+                </div>
+      
+
+                                          <div class="benefit-item">
+                                              <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M280-80v-100l120-84v-144L80-280v-120l320-224v-176q0-33 23.5-56.5T480-880q33 0 56.5 23.5T560-800v176l320 224v120L560-408v144l120 84v100l-200-60-200 60Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Annual Trips</h3>
+                        <p>Once a year, the whole team vibes on an epic trip - yep, sometimes international. Work hard, play harder.</p>
+                    </div>
+                </div>
+
+                                                          <div class="benefit-item">
+                                              <div class="benefit-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 -960 960 960" fill="#FFFFFF">
+    <path d="M680-120q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35Zm-30-280v-80h60v80h-60Zm0 400v-80h60V0h-60Zm165-333-43-42 57-57 42 43-56 56ZM531-49l-42-42 57-57 42 42-57 57Zm309-161v-60h80v60h-80Zm-400 0v-60h80v60h-80ZM829-49l-56-57 42-42 57 56-43 43ZM545-332l-56-57 42-42 57 56-43 43ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v160H200v400h160v80H200Zm0-560h560v-80H200v80Zm0 0v-80 80Z"/>
+  </svg>
+</div>
+                    <div class="benefit-content">
+                        <h3>Monthly Early Friday</h3>
+                        <p>Every month, finish work one hour early on a Friday - a mini weekend kickoff that doesn’t mess with your paycheck.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+<section class="section contact" id="getintouch">
+  <div class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="accent-line"></div>
+    <div class="section-content">
+      <p>Interested in what we're building? Want to be part of the journey? Let's connect and explore the possibilities together.</p>
+      <div style="display: flex; justify-content: center; margin-top: 1rem;">
+        <a href="mailto:hello@laiusgroup.com" class="btn btn-primary" style="display: flex; align-items: center; gap: 8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               height="23" width="23" fill="#FFFFFF" 
+               viewBox="0 -960 960 960" 
+               preserveAspectRatio="xMidYMid meet">
+            <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/>
+          </svg>
+          hello@laiusgroup.com
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</section>
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="sso.html">Log in (Corp & Partners)</a>
+                <a href="mailto:hello@laiusgroup.com">Contact</a>
+                <a href="mailto:collaborate@laiusgroup.com">Collaborate</a>
+            </div>
+            <div class="footer-disclaimer">
+                © 2025 Laius Group. Launching in 2031.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px)';
+                this.style.boxShadow = '0 8px 25px rgba(92, 0, 255, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        document.querySelectorAll('.benefit-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 6px 20px rgba(47, 232, 198, 0.15)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // pulse effect
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const geometricElements = document.querySelectorAll('.geometric-accent');
+            
+            geometricElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.2);
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        const serviceCards = document.querySelectorAll('.service-card');
+        const servicesObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        serviceCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            servicesObserver.observe(card);
+        });
+
+        const benefitItems = document.querySelectorAll('.benefit-item');
+        const benefitsObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        benefitItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-30px)';
+            item.style.transition = 'all 0.6s ease';
+            benefitsObserver.observe(item);
+        });
+    </script>
+</body>
+</html>
