@@ -2,9 +2,9 @@
 <!--
    Developed by: Igor Kalen  
    Contact: igor@igorkalen.dev  
-   Creation Date: August 6, 2025  
+   Creation Date: August 5, 2025  
    Last Updated: August 7, 2025
-   Version: 1.0.0
+   Version: 1.1.0
    File: index.html
    
    ----
@@ -19,449 +19,10 @@
 -->
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Igor Kalen</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000000;
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            opacity: 0;
-            animation: fadeInUp 1.5s ease forwards;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            font-weight: 400;
-            color: #999999;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .hero .subtitle::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 1px;
-            background: #666666;
-        }
-
-        .hero .description {
-            font-size: 1.1rem;
-            color: #777777;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        .nav {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        .nav a {
-            color: #888888;
-            text-decoration: none;
-            font-weight: 400;
-            transition: color 0.3s ease;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .nav a:hover {
-            color: #ffffff;
-        }
-
-        section {
-            min-height: 100vh;
-            padding: 8rem 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 500;
-            margin-bottom: 4rem;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 80px;
-            height: 2px;
-            background: #ffffff;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .skill-category {
-            padding: 2.5rem;
-            border: 1px solid #2a2a2a;
-            border-radius: 12px;
-            transition: all 0.4s ease;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-        }
-
-        .skill-category:hover {
-            border-color: #444444;
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .skill-category h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        .skill-category p {
-            color: #999999;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 0.4rem 1rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            color: #cccccc;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 400;
-        }
-
-        .projects-grid {
-            display: grid;
-            gap: 6rem;
-            margin-top: 4rem;
-        }
-
-        .project {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            padding: 3rem 0;
-        }
-
-        .project:nth-child(even) .project-content {
-            order: 2;
-        }
-
-        .project:nth-child(even) .project-info {
-            order: 1;
-        }
-
-        .project-info h3 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        .project-info p {
-            color: #aaaaaa;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 400;
-            transition: all 0.3s ease;
-            border: 1px solid #333333;
-            padding: 1rem 1.8rem;
-            border-radius: 8px;
-            margin-right: 1rem;
-            margin-bottom: 0.8rem;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-        }
-
-        .project-link:hover {
-            border-color: #555555;
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .project-content {
-            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
-            border-radius: 16px;
-            padding: 3rem;
-            border: 1px solid #2a2a2a;
-            height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        .project-content span {
-            color: #999999;
-            font-size: 1.1rem;
-            font-weight: 400;
-            text-align: center;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #cccccc;
-        }
-
-        .about-text p:first-child {
-            margin-bottom: 2rem;
-        }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 2.5rem;
-            border: 1px solid #2a2a2a;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .stat:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.06);
-            border-color: #444444;
-        }
-
-        .stat-number {
-            font-size: 2.8rem;
-            font-weight: 600;
-            color: #ffffff;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #999999;
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        footer {
-            padding: 6rem 0 4rem;
-            text-align: center;
-            border-top: 1px solid #2a2a2a;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-content h3 {
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .footer-content p {
-            color: #999999;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        .social-links a {
-            color: #888888;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .social-links a:hover {
-            color: #ffffff;
-        }
-
-        .footer-bottom {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #2a2a2a;
-            color: #666666;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-
-            section {
-                padding: 4rem 0;
-            }
-
-            .project {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .project:nth-child(even) .project-content,
-            .project:nth-child(even) .project-info {
-                order: initial;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .about-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #1a1a1a;
-            z-index: 1000;
-        }
-
-        .scroll-progress {
-            height: 100%;
-            background: #ffffff;
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
     <div class="scroll-indicator">
@@ -473,15 +34,14 @@
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
+        <a href="/services">Services</a>
     </nav>
 
     <section class="hero">
         <div class="hero-content">
             <h1>Igor Kalen</h1>
             <p class="subtitle">Developer & Designer</p>
-            <p class="description">
-                Full-stack development and graphic design
-            </p>
+            <p class="description">Full-stack development and graphic design</p>
         </div>
     </section>
 
@@ -491,13 +51,16 @@
             <div class="about-content">
                 <div class="about-text fade-in">
                     <p>
-                        I develop websites, systems, and create graphics, focusing on thoughtful design.
-                        My journey in technology started in 2020, and since then I've been blending design thinking with technical problem-solving.
+                        I develop websites, systems, and create graphics, focusing on
+                        thoughtful design. My journey in technology started in 2020, and
+                        since then I've been blending design thinking with technical
+                        problem-solving.
                     </p>
                     <p>
-                        From managing Linux servers to crafting perfect interfaces, 
-                        I enjoy every aspect of the process. When I'm not coding, 
-                        you'll find me working on graphic design projects or building something new.
+                        From managing Linux servers to crafting perfect interfaces, I
+                        enjoy every aspect of the process. When I'm not coding, you'll
+                        find me working on graphic design projects or building something
+                        new.
                     </p>
                 </div>
                 <div class="about-stats fade-in">
@@ -520,7 +83,10 @@
             <div class="skills-grid">
                 <div class="skill-category fade-in">
                     <h3>Frontend Development</h3>
-                    <p>Creating responsive and interactive web experiences with modern technologies</p>
+                    <p>
+                        Creating responsive and interactive web experiences with modern
+                        technologies
+                    </p>
                     <div class="skills-list">
                         <span class="skill-tag">HTML</span>
                         <span class="skill-tag">CSS</span>
@@ -542,7 +108,9 @@
                 </div>
                 <div class="skill-category fade-in">
                     <h3>System Administration</h3>
-                    <p>Managing and optimizing server environments and infrastructure</p>
+                    <p>
+                        Managing and optimizing server environments and infrastructure
+                    </p>
                     <div class="skills-list">
                         <span class="skill-tag">Linux</span>
                         <span class="skill-tag">Server Management</span>
@@ -552,7 +120,9 @@
                 </div>
                 <div class="skill-category fade-in">
                     <h3>Design</h3>
-                    <p>Creating compelling visual identities and user-centered interfaces</p>
+                    <p>
+                        Creating compelling visual identities and user-centered interfaces
+                    </p>
                     <div class="skills-list">
                         <span class="skill-tag">Graphic Design</span>
                         <span class="skill-tag">Brand Identity</span>
@@ -571,7 +141,10 @@
                 <div class="project fade-in">
                     <div class="project-info">
                         <h3>Laius Group</h3>
-                        <p>A comprehensive design agency. Built with modern web technologies and optimized for user experience.</p>
+                        <p>
+                            A comprehensive design agency. Built with modern web
+                            technologies and optimized for user experience.
+                        </p>
                         <a href="/laiusgroup/v1/index.html" class="project-link">Visit Version 1 Site</a>
                         <a href="/laiusgroup/v2/index.html" class="project-link">Visit Version 2 Site</a>
                     </div>
@@ -583,7 +156,11 @@
                 <div class="project fade-in">
                     <div class="project-info">
                         <h3>Laius Entertainment</h3>
-                        <p>A game studio website featuring modern design and interactive elements. Showcases our gaming projects and studio capabilities with engaging user interface.</p>
+                        <p>
+                            A game studio website featuring modern design and interactive
+                            elements. Showcases our gaming projects and studio capabilities
+                            with engaging user interface.
+                        </p>
                         <a href="https://laiusgames.com" class="project-link" target="_blank">Visit Site</a>
                     </div>
                     <div class="project-content">
@@ -594,7 +171,11 @@
                 <div class="project fade-in">
                     <div class="project-info">
                         <h3>Laius Radio</h3>
-                        <p>An online radio platform with streaming capabilities and modern interface design. Features real-time audio streaming and user-friendly controls.</p>
+                        <p>
+                            An online radio platform with streaming capabilities and modern
+                            interface design. Features real-time audio streaming and
+                            user-friendly controls.
+                        </p>
                         <a href="https://radio.laiusgames.com" class="project-link" target="_blank">Tune In</a>
                     </div>
                     <div class="project-content">
@@ -605,7 +186,11 @@
                 <div class="project fade-in">
                     <div class="project-info">
                         <h3>Password Generator</h3>
-                        <p>A secure password generation tool with customizable options and modern interface. Built with JavaScript and now open-sourced on GitHub.</p>
+                        <p>
+                            A secure password generation tool with customizable options and
+                            modern interface. Built with JavaScript and now open-sourced on
+                            GitHub.
+                        </p>
                         <a href="https://password-generator.laiusgames.com" class="project-link" target="_blank">Try It Out</a>
                         <a href="https://github.com/igorkalen/passwordgenerator" class="project-link" target="_blank">View Source</a>
                     </div>
@@ -617,14 +202,33 @@
         </div>
     </section>
 
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Let's Work Together</h2>
+            <div class="contact-content fade-in">
+                <p class="contact-text">
+                    Ready to bring your project to life? Every project starts with a
+                    conversation. Let's discuss your vision and create something amazing
+                    together.
+                </p>
+                <a href="mailto:igor@igorkalen.dev?subject=Project Inquiry" class="contact-button">Contact Me</a>
+                <p class="contact-note">
+                    All pricing is custom-tailored based on your specific requirements
+                    and project scope.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <footer id="contact">
         <div class="container">
             <div class="footer-content">
                 <div>
-                    <h3>Let's Connect</h3>
-                    <p>Ready to bring your ideas to life</p>
+                    <h3>Igor Kalen</h3>
+                    <p>Developer & Designer</p>
                 </div>
                 <div class="social-links">
+                    <a href="/services" target="_blank">Services</a>
                     <a href="https://github.com/igorkalen" target="_blank">GitHub</a>
                     <a href="mailto:igor@igorkalen.dev">Contact (igor@igorkalen.dev)</a>
                 </div>
@@ -635,41 +239,6 @@
         </div>
     </footer>
 
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        window.addEventListener('scroll', () => {
-            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.querySelector('.scroll-progress').style.width = scrolled + '%';
-        });
-    </script>
+    <script src="/scripts/motion.js"></script>
 </body>
 </html>
